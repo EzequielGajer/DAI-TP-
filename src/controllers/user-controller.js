@@ -13,10 +13,10 @@ router.post('/login', async (req, res) => {
     console.log('password:', password);
 
     try {
-        const user = await getUserByUsername(username);
+        const user = await getUserByUsername(username, password);
         console.log('User retrieved from DB:', user);
 
-        if (!user) {
+        if (user == null) {
             console.log('User not found');
             return res.status(401).json({
                 success: false,
@@ -24,20 +24,9 @@ router.post('/login', async (req, res) => {
                 token: ''
             });
         }
-
-        const validPassword = await bcrypt.compare(password, user.password);
-        console.log('Password is valid:', validPassword);
-
-        if (!validPassword) {
-            console.log('Invalid password');
-            return res.status(401).json({
-                success: false,
-                message: 'Usuario o clave inválida.',
-                token: ''
-            });
-        }
-
-        const token = jwt.sign({ id: user.id, username: user.username }, 'your_jwt_secret', { expiresIn: '1h' });
+        
+        console.log('OK',user);
+        const token = jwt.sign(user, 'your_jwt_secret', { expiresIn: '1h' });
         console.log('Generated token:', token);
 
         res.status(200).json({
@@ -70,7 +59,7 @@ router.post('/register', async (req, res) => {
 
     try {
         //const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = await createUser({ first_name, last_name, username, password: hashedPassword });
+        const newUser = await createUser({ first_name, last_name, username, password});
         console.log('New user created:', newUser);
         res.status(201).json({ message: 'Usuario registrado exitosamente.' });
     } catch (error) {
