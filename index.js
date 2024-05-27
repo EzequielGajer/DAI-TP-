@@ -7,7 +7,6 @@ import EnrollmentRouter from './src/controllers/enrollment-controller.js';
 import UserRouter from './src/controllers/user-controller.js';
 import EventRouter from './src/controllers/event-controller.js'; 
 
-
 const app = express();
 const port = 3000;
 

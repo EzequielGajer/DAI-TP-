@@ -1,6 +1,5 @@
-// src/controllers/event-controller.js
 import express from 'express';
-import { createEvent, updateEvent, deleteEvent, getEventById } from '../services/event-service.js';
+import { createEvent, updateEvent, deleteEvent, getEventById, getEventDetailsById } from '../services/event-service.js';
 import { authenticateToken } from '../middlewares/auth-middleware.js';
 
 const router = express.Router();
@@ -80,6 +79,21 @@ router.delete('/:id', authenticateToken, async (req, res) => {
 
         await deleteEvent(eventId);
         res.status(200).json({ message: 'Evento eliminado correctamente.' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// Obtener detalles de un evento
+router.get('/:id', async (req, res) => {
+    const eventId = req.params.id;
+
+    try {
+        const eventDetails = await getEventDetailsById(eventId);
+        if (!eventDetails) {
+            return res.status(404).json({ message: 'Evento no encontrado.' });
+        }
+        res.status(200).json(eventDetails);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
