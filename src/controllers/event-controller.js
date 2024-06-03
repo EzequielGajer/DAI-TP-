@@ -1,5 +1,5 @@
 import express from 'express';
-import { createEvent, updateEvent, deleteEvent, getEventById, getEventDetailsById } from '../services/event-service.js';
+import { createEvent, updateEvent, deleteEvent, getEventById, getEventDetailsById, getEventEnrollments, getEvents, searchEvents } from '../services/event-service.js';
 import { authenticateToken } from '../middlewares/auth-middleware.js';
 
 const router = express.Router();
@@ -94,6 +94,37 @@ router.get('/:id', async (req, res) => {
             return res.status(404).json({ message: 'Evento no encontrado.' });
         }
         res.status(200).json(eventDetails);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// Búsqueda de eventos con filtros
+router.get('/', async (req, res) => {
+    const { name, category, startdate, tag } = req.query;
+    const limit = parseInt(req.query.limit, 10) || 10;
+    const offset = parseInt(req.query.offset, 10) || 0;
+
+    const filters = {
+        name,
+        category,
+        startdate,
+        tag,
+        limit,
+        offset
+    };
+
+    try {
+        const { events, total } = await searchEvents(filters);
+        res.status(200).json({
+            collection: events,
+            pagination: {
+                limit,
+                offset,
+                total,
+                nextPage: offset + limit < total ? `/api/event?${new URLSearchParams({ name, category, startdate, tag, limit, offset: offset + limit }).toString()}` : null
+            }
+        });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

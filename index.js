@@ -5,7 +5,8 @@ import CategoryRouter from './src/controllers/category-controller.js';
 import LocationRouter from './src/controllers/location-controller.js';
 import EnrollmentRouter from './src/controllers/enrollment-controller.js';
 import UserRouter from './src/controllers/user-controller.js';
-import EventRouter from './src/controllers/event-controller.js'; 
+import EventRouter from './src/controllers/event-controller.js';
+import EventLocationRouter from './src/controllers/event-location-controller.js'; 
 
 const app = express();
 const port = 3000;
@@ -18,7 +19,8 @@ app.use('/api/event-category', CategoryRouter);
 app.use('/api/location', LocationRouter);
 app.use('/api/enrollment', EnrollmentRouter);
 app.use('/api/user', UserRouter);
-app.use('/api/event', EventRouter); 
+app.use('/api/event', EventRouter);
+app.use('/api/event-location', EventLocationRouter); 
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
