@@ -23,5 +23,5 @@ app.use('/api/event', EventRouter);
 app.use('/api/event-location', EventLocationRouter); 
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+    console.log(`La aplicación está escuchando en el puerto ${port}`);
 });

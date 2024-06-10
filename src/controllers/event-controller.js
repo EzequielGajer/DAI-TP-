@@ -1,6 +1,20 @@
 import express from 'express';
-import { createEvent, updateEvent, deleteEvent, getEventById, getEventDetailsById, getEventEnrollments, getEvents, searchEvents } from '../services/event-service.js';
+import {
+    createEvent,
+    updateEvent,
+    deleteEvent,
+    getEventById,
+    getEventDetailsById,
+    getEventEnrollments,
+    getEvents,
+    searchEvents,
+    enrollInEvent,
+    removeEnrollment,
+    rateEvent // Agrega esta línea para importar rateEvent desde event-service.js
+} from '../services/event-service.js'; // Asegúrate de que la ruta sea correcta
+
 import { authenticateToken } from '../middlewares/auth-middleware.js';
+import { cancelEnrollment } from '../services/event-service.js'; // Asegúrate de que cancelEnrollment esté disponible en event-service.js
 
 const router = express.Router();
 
@@ -99,35 +113,72 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// Búsqueda de eventos con filtros
-router.get('/', async (req, res) => {
-    const { name, category, startdate, tag } = req.query;
-    const limit = parseInt(req.query.limit, 10) || 10;
-    const offset = parseInt(req.query.offset, 10) || 0;
-
-    const filters = {
-        name,
-        category,
-        startdate,
-        tag,
-        limit,
-        offset
-    };
-
+// Obtener inscripciones de un evento
+router.get('/:id/enrollment', async (req, res) => {
+    const eventId = req.params.id;
     try {
-        const { events, total } = await searchEvents(filters);
-        res.status(200).json({
-            collection: events,
-            pagination: {
-                limit,
-                offset,
-                total,
-                nextPage: offset + limit < total ? `/api/event?${new URLSearchParams({ name, category, startdate, tag, limit, offset: offset + limit }).toString()}` : null
-            }
-        });
+        const enrollments = await getEventEnrollments(eventId);
+        if (!enrollments) {
+            return res.status(404).json({ message: 'No se encontraron inscripciones para este evento.' });
+        }
+        res.status(200).json(enrollments);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
 
+// Obtener eventos (con filtro de búsqueda)
+router.get('/', async (req, res) => {
+    const { name, category, startDate, endDate, page, pageSize } = req.query;
+
+    try {
+        const events = await searchEvents({ name, category, startDate, endDate, page, pageSize });
+        res.status(200).json(events);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// Inscribirse en un evento
+router.post('/:id/enrollment', authenticateToken, async (req, res) => {
+    const eventId = req.params.id;
+    const userId = req.user.id;
+    console.log("aasd")
+    try {
+        const enrollment = await enrollInEvent(eventId, userId);
+        res.status(200).json(enrollment);
+    } catch (error) {
+        res.status(error.status || 500).json({ message: error.message });
+    }
+});
+
+// Cancelar inscripción en un evento
+router.delete('/:id/enroll', authenticateToken, async (req, res) => {
+    const eventId = req.params.id;
+    const userId = req.user.id;
+
+    try {
+        await removeEnrollment(eventId, userId);
+        res.status(200).json({ message: 'Inscripción cancelada correctamente.' });
+    } catch (error) {
+        res.status(error.status || 500).json({ message: error.message });
+    }
+});
+
+// Calificar un evento
+router.patch('/:id/enrollment/:enrollmentId', authenticateToken, async (req, res) => {
+    const eventId = req.params.id;
+    const enrollmentId = req.params.enrollmentId;
+    const { rating, observations } = req.body;
+
+    try {
+        await rateEvent(eventId, enrollmentId, rating, observations); // Utiliza rateEvent aquí
+        res.status(200).json({ message: 'Evento rankeado correctamente.' });
+    } catch (error) {
+        res.status(error.status || 500).json({ message: error.message });
+    }
+});
+
 export default router;
+
+
