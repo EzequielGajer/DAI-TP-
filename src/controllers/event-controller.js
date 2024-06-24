@@ -141,42 +141,48 @@ router.get('/', async (req, res) => {
 
 // Inscribirse en un evento
 router.post('/:id/enrollment', authenticateToken, async (req, res) => {
+    let respuesta;
     const eventId = req.params.id;
     const userId = req.user.id;
     console.log("aasd")
     try {
         const enrollment = await enrollInEvent(eventId, userId);
-        res.status(200).json(enrollment);
+        respuesta =res.status(201).json();
     } catch (error) {
-        res.status(error.status || 500).json({ message: error.message });
+        respuesta = res.status(error.status || 500).json({ message: error.message });
     }
+    return respuesta;
 });
 
 // Cancelar inscripción en un evento
-router.delete('/:id/enroll', authenticateToken, async (req, res) => {
+router.delete('/:id/enrollment', authenticateToken, async (req, res) => {
     const eventId = req.params.id;
     const userId = req.user.id;
+    let respuesta;
 
     try {
         await removeEnrollment(eventId, userId);
-        res.status(200).json({ message: 'Inscripción cancelada correctamente.' });
+         respuesta = res.status(200).json({ message: 'Inscripción cancelada correctamente.' });
     } catch (error) {
-        res.status(error.status || 500).json({ message: error.message });
+        respuesta = res.status(error.status || 500).json({ message: error.message });
     }
+    return respuesta;
 });
 
 // Calificar un evento
-router.patch('/:id/enrollment/:enrollmentId', authenticateToken, async (req, res) => {
+router.patch('/:id/enrollment/:rating', authenticateToken, async (req, res) => {
     const eventId = req.params.id;
-    const enrollmentId = req.params.enrollmentId;
-    const { rating, observations } = req.body;
-
+    const rating = req.params.rating;
+    const userId = req.user.id;
+    const { observations } = req.body;
+    let respuesta;
     try {
-        await rateEvent(eventId, enrollmentId, rating, observations); // Utiliza rateEvent aquí
-        res.status(200).json({ message: 'Evento rankeado correctamente.' });
+        await rateEvent(eventId, userId, rating, observations);
+        respuesta = res.status(200).json({ message: 'Evento rankeado correctamente.' });
     } catch (error) {
-        res.status(error.status || 500).json({ message: error.message });
+        respuesta = res.status(error.status || 500).json({ message: error.message });
     }
+    return respuesta;
 });
 
 export default router;

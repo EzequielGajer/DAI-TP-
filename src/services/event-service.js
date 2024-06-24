@@ -57,6 +57,6 @@ export const cancelEnrollment = async (eventId, userId) => {
     return removeEnrollmentRepo(eventId, userId);
 };
 
-export const rateEvent = async (eventId, enrollmentId, rating, observations) => {
-    return rateEventRepo(eventId, enrollmentId, rating, observations);
+export const rateEvent = async (eventId, userId, rating, observations) => {
+    return await rateEventRepo(eventId, userId, rating, observations);
 };
