@@ -1,0 +1,706 @@
+{
+	"info": {
+		"_postman_id": "129fb7ac-cf59-4741-9533-7ddbdd31dcd2",
+		"name": "Tp Eventos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Location",
+			"item": [
+				{
+					"name": "location",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/location",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"location"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "location/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/location/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"location",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "users - Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var res = pm.response.json()\r",
+									"pm.environment.set(\"token\", res.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"nicole@gmail.com\",\r\n    \"password\": \"nicbru119\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users - Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"Ronitooo\",\r\n    \"last_name\": \"Chmielevsky\",\r\n    \"username\": \"roni@gmail.com\",\r\n    \"password\": \"ronchm124\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Provincias",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/province/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"province",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/province/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"province",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "locations province",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/province/0/locations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"province",
+								"0",
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post province",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"Ciudad Autónoma de Buenos Aires\",\r\n    \"full_name\": \"Ciudad Autónoma de Buenos Aires\",\r\n    \"latitude\": \"-34.61444091796875\",\r\n    \"longitude\": \"-58.445877075195312\",\r\n    \"display_order\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/province/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"province",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"Ciudad Autónoma de Buenos Aires\",\r\n    \"full_name\": \"Ciudad Autónoma de Buenos Aires\",\r\n    \"latitude\": \"-34.61444091796875\",\r\n    \"longitude\": \"-58.445877075195312\",\r\n    \"display_order\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/province/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"province",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/province/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"province",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Eventos",
+			"item": [
+				{
+					"name": "category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 5,\r\n        \"name\": \"Automovilisticos\",\r\n        \"display_order\": 10\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/event-category/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"event-category",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Deportivos\",\r\n    \"display_order\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/event-category/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"event-category",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/event-category/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"event-category",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "enrollment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/enrollment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"enrollment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "creacion event",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTksImZpcnN0X25hbWUiOiJOaWNvbGUiLCJsYXN0X25hbWUiOiJCcnVuc3RlaW4iLCJ1c2VybmFtZSI6Im5pY29sZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6Im5pY2JydTExOSIsImlhdCI6MTcyMDQ0NjE3NCwiZXhwIjoxNzIwNDQ5Nzc0fQ.ypYU49GLqP-y8yYgTELrwOC3bREy_vTb6JqzrLWM9PQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/event/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"event",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "event details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTksImZpcnN0X25hbWUiOiJOaWNvbGUiLCJsYXN0X25hbWUiOiJCcnVuc3RlaW4iLCJ1c2VybmFtZSI6Im5pY29sZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6Im5pY2JydTExOSIsImlhdCI6MTcyMDQ0NjE3NCwiZXhwIjoxNzIwNDQ5Nzc0fQ.ypYU49GLqP-y8yYgTELrwOC3bREy_vTb6JqzrLWM9PQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 6,\r\n    \"name\": \"Taylor Swift\",\r\n    \"description\": \"Taylor Swift viene a Argentina el 9, 10 y 12 de noviembre de 2023.\",\r\n    \"id_event_category\": 3,\r\n    \"start_date\": \"2023-11-09T03:00:00.000Z\",\r\n    \"duration_in_minutes\": 120,\r\n    \"price\": \"50000\",\r\n    \"enabled_for_enrollment\": \"1\",\r\n    \"max_assistance\": 120000,\r\n    \"id_creator_user\": 1,\r\n    \"event_location_id\": 4,\r\n    \"event_location_name\": \"Estadio de River Plate\",\r\n    \"event_location_full_address\": \"Av. Pres. Figueroa Alcorta 7597, C1428 Cdad. Autónoma de Buenos Aires\",\r\n    \"event_location_max_capacity\": \"84567\",\r\n    \"event_location_latitude\": \"-34.54453950530218\",\r\n    \"event_location_longitude\": \"-58.44976340223022\",\r\n    \"location_id\": 3391,\r\n    \"location_name\": \"Nuñez\",\r\n    \"location_latitude\": \"-34.548805236816406\",\r\n    \"location_longitude\": \"-58.463230133056641\",\r\n    \"province_id\": 2,\r\n    \"province_name\": \"Ciudad Autónoma de Buenos Aires\",\r\n    \"province_full_name\": \"Ciudad Autónoma de Buenos Aires\",\r\n    \"province_latitude\": \"-34.61444091796875\",\r\n    \"province_longitude\": \"-58.445877075195312\",\r\n    \"creator_user_id\": 1,\r\n    \"creator_user_first_name\": \"Pablo\",\r\n    \"creator_user_last_name\": \"Ulman\",\r\n    \"creator_user_username\": \"pablo.ulman@ort.edu.ar\",\r\n    \"event_category_id\": 3,\r\n    \"event_category_name\": \"Recitales\",\r\n    \"event_category_display_order\": 70,\r\n    \"tags\": [\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"rock\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"name\": \"pop\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/event/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"event",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listado participantes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/event/6/enrollment?attended=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"event",
+								"6",
+								"enrollment"
+							],
+							"query": [
+								{
+									"key": "attended",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listado eventos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/event",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ubicacion evento",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTksImZpcnN0X25hbWUiOiJOaWNvbGUiLCJsYXN0X25hbWUiOiJCcnVuc3RlaW4iLCJ1c2VybmFtZSI6Im5pY29sZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6Im5pY2JydTExOSIsImlhdCI6MTcyMDQzNjcyOCwiZXhwIjoxNzIwNDQwMzI4fQ.-BdHzwHXE_22LSAQDdmUolmNDMay_kbdoamlHlFAFuM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/event-location/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"event-location",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Busqueda evento",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/event/?name=taylor&category=Musica&startdate=2024-03-03&tag=Rock",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"event",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "taylor"
+								},
+								{
+									"key": "category",
+									"value": "Musica"
+								},
+								{
+									"key": "startdate",
+									"value": "2024-03-03"
+								},
+								{
+									"key": "tag",
+									"value": "Rock"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inscripcion evento - Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTksImZpcnN0X25hbWUiOiJOaWNvbGUiLCJsYXN0X25hbWUiOiJCcnVuc3RlaW4iLCJ1c2VybmFtZSI6Im5pY29sZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6Im5pY2JydTExOSIsImlhdCI6MTcyMDQzNjcyOCwiZXhwIjoxNzIwNDQwMzI4fQ.-BdHzwHXE_22LSAQDdmUolmNDMay_kbdoamlHlFAFuM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/event/7/enrollment/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"event",
+								"7",
+								"enrollment",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inscripcion evento - Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTksImZpcnN0X25hbWUiOiJOaWNvbGUiLCJsYXN0X25hbWUiOiJCcnVuc3RlaW4iLCJ1c2VybmFtZSI6Im5pY29sZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6Im5pY2JydTExOSIsImlhdCI6MTcyMDQzNjcyOCwiZXhwIjoxNzIwNDQwMzI4fQ.-BdHzwHXE_22LSAQDdmUolmNDMay_kbdoamlHlFAFuM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/event/7/enrollment/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"event",
+								"7",
+								"enrollment",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Evento - Rating",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTksImZpcnN0X25hbWUiOiJOaWNvbGUiLCJsYXN0X25hbWUiOiJCcnVuc3RlaW4iLCJ1c2VybmFtZSI6Im5pY29sZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6Im5pY2JydTExOSIsImlhdCI6MTcyMDQzNjcyOCwiZXhwIjoxNzIwNDQwMzI4fQ.-BdHzwHXE_22LSAQDdmUolmNDMay_kbdoamlHlFAFuM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"observations\": \"Fue increíble!!. Conviene estacionar lejos!!!!\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/event/7/enrollment/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"event",
+								"7",
+								"enrollment",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
